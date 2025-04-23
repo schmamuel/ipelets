@@ -697,3 +697,27 @@ methods = {
 }
 
 ----------------------------------------------------------------------
+
+--remapping shortcuts to my_align instead
+shortcuts.ipelet_1_align = "8" --align top
+shortcuts.ipelet_2_align = "Alt+Shift+B" --align bottom
+shortcuts.ipelet_3_align = "Alt+Shift+L" --align left
+shortcuts.ipelet_4_align = "Alt+Shift+R" --align right
+shortcuts.ipelet_5_align = nil
+shortcuts.ipelet_6_align = nil
+shortcuts.ipelet_7_align = nil
+shortcuts.ipelet_10_align = "Ctrl+Alt+Shift+H" --distribute horizontally
+shortcuts.ipelet_14_align = "Ctrl+Alt+Shift+T" --distribute with skip
+shortcuts.ipelet_15_align = "Ctrl+Alt+Shift+V" --distribute vertically
+
+shortcuts.ipelet_1_my_align = "Shift+T" --align top
+shortcuts.ipelet_2_my_align = "Shift+B" --align bottom
+shortcuts.ipelet_3_my_align = "Shift+L" --align left
+shortcuts.ipelet_4_my_align = "Shift+R" --align right
+shortcuts.ipelet_5_my_align = "Shift+C" --align center
+shortcuts.ipelet_6_my_align = "Shift+H" --align horizontally
+shortcuts.ipelet_7_my_align = "Shift+V" --align vertically
+shortcuts.ipelet_10_my_align = "Alt+Shift+H" --distribute horizontally
+shortcuts.ipelet_14_my_align = "Alt+Shift+T" --distrivute with skip
+shortcuts.ipelet_15_my_align = "Alt+Shift+V" --distribute vertically
+shortcuts.ipelet_21_my_align = "Alt+Shift+G" --distribute horizontally on grid

@@ -72,3 +72,6 @@ function undo(model, layers, page)
         p:renameLayer(l,layers[i])
     end
 end
+
+------------------------------------
+shortcuts.ipelet_1_rename_unused_layers = "Ctrl+Del"
