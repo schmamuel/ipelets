@@ -1,4 +1,4 @@
-label = "My_Group"
+label = "layer sensitive grouping"
 
 revertOriginal = _G.revertOriginal
 
@@ -99,7 +99,16 @@ methods = {
 }
 ----------------------------------------------------------------------
 
-shortcuts.ipelet_1_my_group = shortcuts.group
-shortcuts.ipelet_2_my_group = shortcuts.ungroup
-shortcuts.group = nil
-shortcuts.ungroup = nil
+-- shortcuts.ipelet_1_my_group = shortcuts.group
+-- shortcuts.ipelet_2_my_group = shortcuts.ungroup
+-- shortcuts.group = nil
+-- shortcuts.ungroup = nil
+
+
+function _G.MODEL:saction_group()
+	group(self)
+end
+
+function _G.MODEL:saction_ungroup()
+	ungroup(self)
+end

@@ -1,4 +1,4 @@
-label = "My_Align"
+label = "decoration respecting align"
 
 revertOriginal = _G.revertOriginal
 
@@ -698,7 +698,7 @@ methods = {
 
 ----------------------------------------------------------------------
 
---remapping shortcuts to my_align instead
+--remapping shortcuts to decoration_respecting_align instead
 shortcuts.ipelet_1_align = "8" --align top
 shortcuts.ipelet_2_align = "Alt+Shift+B" --align bottom
 shortcuts.ipelet_3_align = "Alt+Shift+L" --align left
@@ -710,14 +710,15 @@ shortcuts.ipelet_10_align = "Ctrl+Alt+Shift+H" --distribute horizontally
 shortcuts.ipelet_14_align = "Ctrl+Alt+Shift+T" --distribute with skip
 shortcuts.ipelet_15_align = "Ctrl+Alt+Shift+V" --distribute vertically
 
-shortcuts.ipelet_1_my_align = "Shift+T" --align top
-shortcuts.ipelet_2_my_align = "Shift+B" --align bottom
-shortcuts.ipelet_3_my_align = "Shift+L" --align left
-shortcuts.ipelet_4_my_align = "Shift+R" --align right
-shortcuts.ipelet_5_my_align = "Shift+C" --align center
-shortcuts.ipelet_6_my_align = "Shift+H" --align horizontally
-shortcuts.ipelet_7_my_align = "Shift+V" --align vertically
-shortcuts.ipelet_10_my_align = "Alt+Shift+H" --distribute horizontally
-shortcuts.ipelet_14_my_align = "Alt+Shift+T" --distrivute with skip
-shortcuts.ipelet_15_my_align = "Alt+Shift+V" --distribute vertically
-shortcuts.ipelet_21_my_align = "Alt+Shift+G" --distribute horizontally on grid
+shortcuts.ipelet_1_decoration_respecting_align = "Shift+T" --align top
+shortcuts.ipelet_2_decoration_respecting_align = "Shift+B" --align bottom
+shortcuts.ipelet_3_decoration_respecting_align = "Shift+L" --align left
+shortcuts.ipelet_4_decoration_respecting_align = "Shift+R" --align right
+shortcuts.ipelet_5_decoration_respecting_align = "Shift+C" --align center
+shortcuts.ipelet_6_decoration_respecting_align = "Shift+H" --align horizontally
+shortcuts.ipelet_7_decoration_respecting_align = "Shift+V" --align vertically
+shortcuts.ipelet_7_decoration_respecting_align = "2" --align baseline
+shortcuts.ipelet_10_decoration_respecting_align = "Alt+Shift+H" --distribute horizontally
+shortcuts.ipelet_14_decoration_respecting_align = "Alt+Shift+T" --distribute with skip
+shortcuts.ipelet_15_decoration_respecting_align = "Alt+Shift+V" --distribute vertically
+shortcuts.ipelet_21_decoration_respecting_align = "Alt+Shift+G" --distribute horizontally on grid
