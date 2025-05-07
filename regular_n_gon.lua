@@ -79,4 +79,4 @@ function run(model)
 end
 
 ----------------------------------------------------------------------
-shortcuts.ipelet_1_regular_k_gon = "n"
+shortcuts.ipelet_1_regular_n_gon = "n"
