@@ -1,5 +1,3 @@
-Some ipelets I wrote.
-
 ## decoration respecting align ##
 
 This ipelet is a slight variation of the standart ipelet "align & distribute". The functionality is the same, except that aligns decorated objects differently.
@@ -15,3 +13,11 @@ This ipelet is a slight variation of the action "regular k gon" that is included
 ## rename unused layers ##
 
 Using this ipelet renames all unused layers, i.e. never visible, on the current page by adding the prefix "unused" to the name of the layer.
+
+## set minipage ##
+
+This ipelet can change labels into minipages and vice versa. It also can change the style of a minipage.
+
+## link ##
+
+This ipelet provides a shortcut for assigning a link action to a group.
