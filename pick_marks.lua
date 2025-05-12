@@ -1,7 +1,5 @@
 label = "Pick & Apply Mark Properties"
 
-revertOriginal = _G.revertOriginal
-
 about = [[
 Changes the behaviour of pick and apply properties for references to allow picking and applying the markshape.
 ]]
