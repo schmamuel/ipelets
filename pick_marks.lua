@@ -21,11 +21,11 @@ function _G.MODEL:pick_properties_reference(obj)
 end
 
 function _G.apply_properties_reference(obj, a)
+	if obj:get("markshape") ~= "undefined" then
+        obj:set("markshape", a.markshape)
+    end
     obj:set("stroke", a.stroke)
     obj:set("fill", a.fill)
     obj:set("pen", a.pen)
     obj:set("symbolsize", a.symbolsize)
-    if obj:get("markshape") ~= "undefined" then
-        obj:set("markshape", a.markshape)
-    end
 end
