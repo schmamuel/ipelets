@@ -11,64 +11,96 @@ end
 
 function smaller_y(p,objects)
     table.sort(objects, function (a,b)
-                local apos = p:bbox(a):bottomLeft()
-                local bpos = p:bbox(b):bottomLeft()
-                if apos.y == bpos.y then
-                    if apos.x == apos.x then
-                        return a < b
-                    else
-                        return apos.x < bpos.x
+                local abox = p:bbox(a)
+                local bbox = p:bbox(b)
+                if abox:bottom() == bbox:bottom() then
+                    if abox:top() == bbox:top() then
+                        if abox:left() == bbox:left() then
+                            if abox:right() == bbox:right() then
+                                return a < b
+                            else 
+                                return abox:right() < bbox:right()
+                            end
+                        else 
+                            return abox:left() < bbox:left()
+                        end
+                    else 
+                        return abox:top() < bbox:top()
                     end
                 else 
-                    return apos.y < bpos.y
+                    return abox:bottom() < bbox:bottom()
                 end
 			end)
 end
 
 function larger_y(p,objects)
     table.sort(objects, function (a,b)
-                local apos = p:bbox(a):bottomLeft()
-                local bpos = p:bbox(b):bottomLeft()
-                if apos.y == bpos.y then
-                    if apos.x == apos.x then
-                        return a > b
-                    else
-                        return apos.x > bpos.x
+                local abox = p:bbox(a)
+                local bbox = p:bbox(b)
+                if abox:bottom() == bbox:bottom() then
+                    if abox:top() == bbox:top() then
+                        if abox:left() == bbox:left() then
+                            if abox:right() == bbox:right() then
+                                return a > b
+                            else 
+                                return abox:right() > bbox:right()
+                            end
+                        else 
+                            return abox:left() > bbox:left()
+                        end
+                    else 
+                        return abox:top() > bbox:top()
                     end
                 else 
-                    return apos.y > bpos.y
+                    return abox:bottom() > bbox:bottom()
                 end
 			end)
 end
 
 function smaller_x(p,objects)
     table.sort(objects, function (a,b)
-                local apos = p:bbox(a):bottomLeft()
-                local bpos = p:bbox(b):bottomLeft()
-                if apos.x == bpos.x then
-                    if apos.y == apos.y then
-                        return a < b
-                    else
-                        return apos.y < bpos.y
+                local abox = p:bbox(a)
+                local bbox = p:bbox(b)
+                if abox:left() == bbox:left() then
+                    if abox:right() == bbox:right() then
+                        if abox:bottom() == bbox:bottom() then
+                            if abox:top() == bbox:top() then
+                                return a < b
+                            else 
+                                return abox:top() < bbox:top()
+                            end
+                        else 
+                            return abox:bottom() < bbox:bottom()
+                        end
+                    else 
+                        return abox:right() < bbox:right()
                     end
                 else 
-                    return apos.x < bpos.x
+                    return abox:left() < bbox:left()
                 end
 			end)
 end
 
 function larger_x(p,objects)
     table.sort(objects, function (a,b)
-                local apos = p:bbox(a):bottomLeft()
-                local bpos = p:bbox(b):bottomLeft()
-                if apos.x == bpos.x then
-                    if apos.y == apos.y then
-                        return a > b
-                    else
-                        return apos.y > bpos.y
+                local abox = p:bbox(a)
+                local bbox = p:bbox(b)
+                if abox:left() == bbox:left() then
+                    if abox:right() == bbox:right() then
+                        if abox:bottom() == bbox:bottom() then
+                            if abox:top() == bbox:top() then
+                                return a > b
+                            else 
+                                return abox:top() > bbox:top()
+                            end
+                        else 
+                            return abox:bottom() > bbox:bottom()
+                        end
+                    else 
+                        return abox:right() > bbox:right()
                     end
                 else 
-                    return apos.x > bpos.x
+                    return abox:left() > bbox:left()
                 end
 			end)
 end
