@@ -66,16 +66,21 @@ function group(model)
 		   local p = doc[t.pno]
 		   layers = p:layers()   
 		   p:remove(t.primary)
-		   counter = 0
-		   for test,obj in ipairs(t.elements) do
+		   local counter = 0
+		   local edited_text = false
+		   for _,obj in ipairs(t.elements) do
+			if obj:type() == "text" then edited_text = true end
+			local custom = obj:getCustom()
+			local xml = obj:xml():gsub('custom="[^"]*"', 'custom=""')
+			obj = _G.ipe.Object(xml)
 			local found = false
 			for _, layername in ipairs(layers) do
-				if layername == obj:getCustom() then 
+				if layername == custom then 
 					found = true 
 				end
 			end
 			 if (found) then
-			 p:insert(nil, obj, 2, obj:getCustom())
+			 p:insert(nil, obj, 2, custom)
 			 else 
 				p:insert(nil, obj, 2, t.layer)
 				counter = counter + 1
@@ -86,6 +91,7 @@ function group(model)
 		   if ( counter > 0 ) then 
         model:warning("Original layer of " .. counter .. " elements was deleted or renamed, they were put on the layer of the group instead")
 		   end
+		   if edited_text then model:autoRunLatex() end
 		 end
      model:register(t)
 	
