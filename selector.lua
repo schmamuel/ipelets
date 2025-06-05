@@ -140,7 +140,7 @@ methods = {
 
 ----------
 
-shortcuts.ipelet_1_selector = "Alt+PgDown"
-shortcuts.ipelet_2_selector = "Alt+PgUp"
-shortcuts.ipelet_3_selector = "Ctrl+Alt+PgDown"
-shortcuts.ipelet_4_selector = "Ctrl+Alt+PgUp"
+shortcuts.ipelet_1_selector = "Tab"
+shortcuts.ipelet_2_selector = "Ctrl+Tab"
+shortcuts.ipelet_3_selector = "Alt+PgDown"
+shortcuts.ipelet_4_selector = "Alt+PgUp"
