@@ -1,4 +1,4 @@
-label = "Set link action"
+label = "Link action"
 
 about = "Assigns a link action to the objects and groups them if they are not already grouped."
 
