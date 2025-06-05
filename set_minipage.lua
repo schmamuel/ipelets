@@ -94,6 +94,7 @@ function set_minipage(model,num)
                 p[i]:set("minipage", bool)
             end
         end
+        model:autoRunLatex()
     end
     t.undo = function (t, doc)
         local p = doc[t.pno]
@@ -102,6 +103,7 @@ function set_minipage(model,num)
                 p[i]:set("minipage", neg)
             end
         end
+        model:autoRunLatex()
     end
     model:register(t) 
 end
@@ -156,8 +158,9 @@ local function set_item(model)
                     p[i]:set("textstyle", style_name)
             end
         end
+        model:autoRunLatex()
     end
-    model:register(t) 
+    model:register(t)
  end
 
 methods = {
