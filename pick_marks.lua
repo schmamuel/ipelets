@@ -1,10 +1,3 @@
-label = "Pick & Apply Mark Properties"
-
-about = [[
-Changes the behaviour of pick and apply properties for references to allow picking and applying the markshape.
-]]
-
-
 function _G.MODEL:pick_properties_reference(obj)
 	local a = self.attributes
 	a.stroke = obj:get("stroke")
