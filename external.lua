@@ -1,4 +1,4 @@
-label = "Edit text with external editor"
+label = "External editor"
 
 function run(model)
     local p = model:page()
