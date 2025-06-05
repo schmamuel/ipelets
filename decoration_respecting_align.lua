@@ -597,7 +597,7 @@ methods = {
   { label = "distribute top sides evenly", run=ttb, compute = ttb_top }, 
   { label = "distribute bottom sides evenly", run=ttb, compute = ttb_bottom }, 
   { label = "set skip...", run = set_skip },
-  { label = "distribute horizonally in grid", run=ltr, compute = ltr_grid },
+  { label = "distribute horizontally in grid", run=ltr, compute = ltr_grid },
   { label = "distribute vertically in grid", run=ttb, compute = ttb_grid },
 }
 
@@ -606,7 +606,7 @@ methods = {
 --remapping shortcuts to decoration_respecting_align instead
 shortcuts.ipelet_1_align = "8" --align top
 shortcuts.ipelet_2_align = "Alt+Shift+B" --align bottom
--- shortcuts.ipelet_3_align = "Alt+Shift+L" --align left
+shortcuts.ipelet_3_align = nil --align left
 shortcuts.ipelet_4_align = "Alt+Shift+R" --align right
 shortcuts.ipelet_5_align = nil
 shortcuts.ipelet_6_align = nil
