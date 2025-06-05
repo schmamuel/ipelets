@@ -1,14 +1,5 @@
 label = "Selector"
 
-function findIndex(array, target)
-    for i, value in ipairs(array) do
-        if value == target then
-            return i
-        end
-    end
-    return nil  -- not found
-end
-
 function smaller_y(p,objects)
     table.sort(objects, function (a,b)
                 local abox = p:bbox(a)
@@ -121,7 +112,7 @@ function run(model, num)
     end
     methods[num].sort(p,objects)
     p:deselectAll()
-    local index = findIndex(objects,prim)
+    local index = _G.findIndex(objects,prim)
     if index == #objects then
         index = 1
     else
