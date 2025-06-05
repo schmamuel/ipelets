@@ -71,5 +71,5 @@ end
  
 -------------------
 
-shortcuts.ipelet_1_absolute = "Ctrl+T"
+shortcuts.ipelet_1_set_absolute = "Ctrl+T"
 shortcuts.absolute = nil

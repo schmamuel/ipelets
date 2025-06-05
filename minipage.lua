@@ -1,20 +1,11 @@
-label = "Change Minipage Attribute" 
+label = "Minipage" 
 
 style_ordering = {"normal","item","subitem","subsubitem"}
 
 fixed = false
 
-function findIndex(array, target)
-    for i, value in ipairs(array) do
-        if value == target then
-            return i
-        end
-    end
-    return nil  -- not found
-end
-
 function get_next_style(style)
-    index = findIndex(style_ordering,style)
+    index = _G.findIndex(style_ordering,style)
     if index == nil then
         return nil
     end
@@ -30,7 +21,7 @@ function check_available_styles(model)
     local textstyles = sheets:allNames("textstyle")
     local available_styles = {}
     for _,style in ipairs(style_ordering) do
-        if findIndex(textstyles,style) ~= nil then
+        if _G.findIndex(textstyles,style) ~= nil then
             table.insert(available_styles, style)
         end
     end
@@ -171,6 +162,6 @@ methods = {
   }
 
 ------
-shortcuts.ipelet_1_set_minipage = "Ctrl+M"
-shortcuts.ipelet_2_set_minipage = "Ctrl+Alt+M"
-shortcuts.ipelet_3_set_minipage = "Ctrl+Alt+I"
+shortcuts.ipelet_1_minipage = "Ctrl+M"
+shortcuts.ipelet_2_minipage = "Ctrl+Alt+M"
+shortcuts.ipelet_3_minipage = "Ctrl+Alt+I"

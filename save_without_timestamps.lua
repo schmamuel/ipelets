@@ -56,7 +56,7 @@ methods = {
 
 --------------
 
-shortcuts.ipelet_1_no_timestamps = shortcuts.save
+shortcuts.ipelet_1_save_without_timestamps = shortcuts.save
 shortcuts.save = nil
 
 

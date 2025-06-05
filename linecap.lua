@@ -45,4 +45,4 @@ methods = {
 
 ------
 
-shortcuts.ipelet_1_set_linecap = "Alt+Shift+L"
+shortcuts.ipelet_1_linecap = "Alt+Shift+L"
