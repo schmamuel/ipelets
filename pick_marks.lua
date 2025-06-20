@@ -3,9 +3,19 @@ function _G.MODEL:pick_properties_reference(obj)
 	a.stroke = obj:get("stroke")
 	local fill = obj:get("fill")
 	if fill ~= "undefined" then
-		a.fill = obj:get("fill")
+		if _G.type(fill) == "table" then
+			local is_white = true
+			for _,rgb in ipairs(fill) do
+				if rgb ~= 255 then is_white = false end
+			end
+			if is_white then fill = "white" end
+		end
+		a.fill = fill
 	end
-	a.pen = obj:get("pen")
+	local pen = obj:get("pen")
+	if pen ~= "undefined" then
+		a.pen = pen
+	end
 	a.symbolsize = obj:get("symbolsize")
 	local name = obj:get("markshape")
 	if name ~= "undefined" then

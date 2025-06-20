@@ -5,7 +5,7 @@ about = [[ Saves the document without updating the timestamp to make merging eas
 
 auto_export_directory = "./"
 
-function save(model)
+function run(model)
   local fname = model.file_name
 
   if not fname then
@@ -43,15 +43,15 @@ function save(model)
   return true
 end 
 
-function change_auto_export_directory(model) 
-  auto_export_directory = model:getString("Enter directory for auto export")
-  model.ui:explain("set auto export directory to " .. auto_export_directory)
-end
+-- function change_auto_export_directory(model) 
+--   auto_export_directory = model:getString("Enter directory for auto export")
+--   model.ui:explain("set auto export directory to " .. auto_export_directory)
+-- end
 
-methods = {
-   { label = "Save", run=save },
-   { label = "Change auto export directory", run=change_auto_export_directory },
-}
+-- methods = {
+--    { label = "Save", run=save },
+--    { label = "Change auto export directory", run=change_auto_export_directory },
+-- }
 
 
 --------------

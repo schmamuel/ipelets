@@ -12,7 +12,7 @@ function group(model)
 	local elements = {}
 	for _,i in ipairs(selection) do
 	  elements[#elements + 1] = p[i]:clone()
-	  elements[#elements]:setCustom(p:layerOf(i))
+	  _G.editCustom(elements[#elements], "layer", p:layerOf(i))
 	end
 	local final = ipe.Group(elements)
 	local prim = p:primarySelection()
@@ -70,9 +70,8 @@ function group(model)
 		   local edited_text = false
 		   for _,obj in ipairs(t.elements) do
 			if obj:type() == "text" then edited_text = true end
-			local custom = obj:getCustom()
-			local xml = obj:xml():gsub('custom="[^"]*"', 'custom=""')
-			obj = _G.ipe.Object(xml)
+			local custom = _G.getCustomField(obj, "layer")
+			_G.deleteCustomField(obj, "layer")
 			local found = false
 			for _, layername in ipairs(layers) do
 				if layername == custom then 

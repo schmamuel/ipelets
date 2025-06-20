@@ -13,6 +13,17 @@ function _G.MODEL:runLatex()
    return self:references_backup_runLatex()
 end
 
+function is_presentation(model)
+   local sheets = model.doc:sheets()
+   for i=1,sheets:count() do
+      local sheet = sheets:sheet(i)
+      if string.find(sheet:name(), "presentation") then
+         return true
+      end
+   end
+   return false
+end
+
 function refresh_references(model)
    local p1 = model.doc[1]
 
@@ -20,9 +31,11 @@ function refresh_references(model)
       local objects = find_objects(model)
       print_on_every_page(model, objects)
    else
-      p1:addLayer(bg_layer)
-      make_layer_visible(p1, bg_layer)
-      model:setPage()
+      if #model.doc > 1 and is_presentation(model) then 
+         p1:addLayer(bg_layer)
+         make_layer_visible(p1, bg_layer)
+         model:setPage()
+      end
    end
 end
 
