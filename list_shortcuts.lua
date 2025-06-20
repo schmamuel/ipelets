@@ -1,10 +1,6 @@
 label = "list shortcuts" 
 
-
-
-
 --this is a map for the names of the shortcuts
-
 local name_map = {
     ["new_window"] = "New Window",
     ["new"] = "New",
@@ -136,7 +132,7 @@ local name_map = {
     ["page_sorter"] = "Page sorter",
     ["toggle_notes"] = "Notes",
     ["toggle_bookmarks"] = "Bookmarks",
-    ["manual"] = "Ipe &manual",
+    ["manual"] = "Ipe manual",
     ["finger_draw"] = "Draw with finger",
     ["tablet_hints"] = "Hints for tablet users",
     ["preferences"] = "Preferences",
@@ -154,9 +150,27 @@ function run(model)
     local shortcuts = {}
     local s = ""
     for label, shortcut in pairs(_G.shortcuts) do
-        
-        table.insert(shortcuts, {label,shortcut})
-
+        local name = label
+        if string.find(name, "ipelet_") then
+            name = name:gsub("^ipelet_%d+_", "")
+            local ipelet = _G.find_ipelet(name)
+            if ipelet ~= nil then 
+                if ipelet.label ~= nil then
+                    name = ipelet.label
+                end
+                if ipelet.methods ~= nil then
+                    local number = tonumber(label:gsub("%D", ""))
+                    name = "(" .. name ..  " ipelet) " .. ipelet.methods[number].label
+                else
+                    name = name .. " ipelet"
+                end
+            end
+        else
+            if name_map[name] then 
+              name = name_map[name] 
+            end
+        end
+        table.insert(shortcuts, {name,shortcut,label})
     end
 
     table.sort(shortcuts, function(a, b)
@@ -170,33 +184,13 @@ function run(model)
             return atemp < btemp
     end)
 
-    for label, shortcut in ipairs(shortcuts) do
-        local name = shortcut[1]
-        if string.find(name, "ipelet_") then
-            name = name:gsub("^ipelet_%d+_", "")
-            local ipelet = _G.find_ipelet(name)
-            if ipelet ~= nil then 
-                if ipelet.label ~= nil then
-                    name = ipelet.label
-                end
-                if ipelet.methods ~= nil then
-                    local number = tonumber(shortcut[1]:gsub("%D", ""))
-                    name = "(" .. name ..  " ipelet) " .. ipelet.methods[number].label
-                else
-                    name = name .. " ipelet"
-                end
-            end
-        else
-            if name_map[name] then 
-            name = name_map[name] 
-        print("ok")
-    end
-        end
-        s = s .. name .. ": '" .. shortcut[2] .."' (shortcuts." .. shortcut[1] .. ")\n"
+    for _, shortcut in ipairs(shortcuts) do
+        s = s .. shortcut[1] .. ": '" .. shortcut[2] .."' (shortcuts." .. shortcut[3] .. ")\n"
     end
     s = s:gsub("\n$", "")
     print(s)
     model.ui:explain("printed all shortcuts to the command line")
+
     -- local d = ipeui.Dialog(model.ui:win(), "Show shortcuts")
     -- d:add("xml", "text", {focus=true }, 1, 1)
     -- d:set("xml", s)
