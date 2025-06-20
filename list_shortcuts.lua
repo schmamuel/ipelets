@@ -68,6 +68,8 @@ local name_map = {
     ["mode_polygons"] = "Polygons",
     ["mode_splines"] = "Splines",
     ["mode_splinegons"] = "Splinegons",
+    ["mode_arc1"] = "Circular arcs (by center, right and left point)",
+    ["mode_arc2"] = "Circular arcs (by center, left and right point)",
     ["mode_arc3"] = "Circular arcs (by 3 points)",
     ["mode_circle1"] = "Circles (by center and radius)",
     ["mode_circle2"] = "Circles (by diameter)",
@@ -82,13 +84,13 @@ local name_map = {
     ["snapangle"] = "Angular snap",
     ["snapauto"] = "Automatic snap",
     ["set_origin"] = "Set origin",
-    ["set_origin_snap"] = "Set origin && snap",
+    ["set_origin_snap"] = "Set origin & snap",
     ["show_axes"] = "Show axes",
     ["set_direction"] = "Set direction",
     ["set_tangent_direction"] = "Set tangent direction",
     ["reset_direction"] = "Reset direction",
     ["set_line"] = "Set line",
-    ["set_line_snap"] = "Set line && snap",
+    ["set_line_snap"] = "Set line & snap",
     ["fullscreen"] = "Fullscreen",
     ["grid_visible"] = "Grid visible",
     ["pretty_display"] = "Pretty display",
@@ -127,7 +129,7 @@ local name_map = {
     ["paste_page"] = "Paste page",
     ["delete_page"] = "Delete page",
     ["jump_page"] = "Jump to page",
-    ["edit_title"] = "Edit title && sections",
+    ["edit_title"] = "Edit title & sections",
     ["edit_notes"] = "Edit notes",
     ["page_sorter"] = "Page sorter",
     ["toggle_notes"] = "Notes",
@@ -148,7 +150,6 @@ local name_map = {
 
 function run(model)
     local shortcuts = {}
-    local s = ""
     for label, shortcut in pairs(_G.shortcuts) do
         local name = label
         if string.find(name, "ipelet_") then
@@ -170,32 +171,28 @@ function run(model)
               name = name_map[name] 
             end
         end
-        table.insert(shortcuts, {name,shortcut,label})
+        name = name:gsub("&&", "&")
+        shortcut = shortcut:gsub("+", " + ")
+        shortcuts[#shortcuts + 1] = name .. ": '" .. shortcut .."' (shortcuts." .. label .. ")\n"
     end
 
-    table.sort(shortcuts, function(a, b)
-        local atemp = a[1]:gsub("^ipelet_%d+_", "")
-        local btemp = b[1]:gsub("^ipelet_%d+_", "")
-        
-        if atemp == btemp then
-            atemp = tonumber(a[1]:gsub("%D", ""))
-            btemp = tonumber(b[1]:gsub("%D", ""))
-        end
-            return atemp < btemp
-    end)
+    table.sort(shortcuts)
 
-    for _, shortcut in ipairs(shortcuts) do
-        s = s .. shortcut[1] .. ": '" .. shortcut[2] .."' (shortcuts." .. shortcut[3] .. ")\n"
-    end
+    local s = "   - " .. table.concat(shortcuts, "\n   - ")
     s = s:gsub("\n$", "")
-    print(s)
-    model.ui:explain("printed all shortcuts to the command line")
 
-    -- local d = ipeui.Dialog(model.ui:win(), "Show shortcuts")
-    -- d:add("xml", "text", {focus=true }, 1, 1)
-    -- d:set("xml", s)
-    
-    -- _G.externalEditor(d, "xml")
+    local d = ipeui.Dialog(win, "Ipe: Shortcuts")
+    d:add("text", "text", {read_only=true }, 1, 1)
+    d:set("text", "To properly show all shortcuts, we need to open a dummy window first.")
+    d:addButton("ok", "Ok", "accept")
+    d:execute()
 
-    -- d:accept()
+    d = ipeui.Dialog(win, "Ipe: Shortcuts")
+    d:add("text", "text", {read_only=true }, 1, 1)
+    d:set("text", s)
+    d:addButton("ok", "Ok", "accept")
+    d:execute(prefs.latexlog_size)
+
 end
+
+shortcuts.ipelet_1_list_shortcuts = "H"
