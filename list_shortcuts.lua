@@ -147,6 +147,13 @@ local name_map = {
     ["developer_list_shortcuts"] = "List shortcuts",
 }
 
+local button = false
+
+function print_on_terminal(d)
+    button = true
+    d:accept()
+end
+
 function run(model)
     local shortcuts = {}
     for label, shortcut in pairs(_G.shortcuts) do
@@ -177,9 +184,8 @@ function run(model)
 
     table.sort(shortcuts)
 
-    local s = "   - " .. table.concat(shortcuts, "\n   - ")
+    local s = table.concat(shortcuts, "\n")
     s = s:gsub("\n$", "")
-    print(s)
 
     -- if not was_opened then
     --     local d = ipeui.Dialog(win, "Ipe: Shortcuts")
@@ -196,12 +202,18 @@ function run(model)
     -- d:addButton("ok", "Ok", "accept")
     -- d:execute(prefs.latexlog_size)
 
-    d = ipeui.Dialog(win, "Ipe: Shortcuts")
+    d = ipeui.Dialog(win, "Shortcuts")
     d:add("list", "list", {}, 1, 1)
     d:set("list", shortcuts)
     d:addButton("ok", "Ok", "accept")
-    d:execute(prefs.latexlog_size)
-
+    d:addButton("copy", "Copy to clipboard", "reject")
+    d:addButton("copy", "Print on terminal", print_on_terminal)
+    copy = d:execute(prefs.latexlog_size)
+    if not copy then model.ui:setClipboard(s) end
+    if button then 
+        print(s)
+        button = false
+    end
 end
 
 ------------------------------------------
