@@ -147,7 +147,6 @@ local name_map = {
     ["developer_list_shortcuts"] = "List shortcuts",
 }
 
-
 function run(model)
     local shortcuts = {}
     for label, shortcut in pairs(_G.shortcuts) do
@@ -180,19 +179,31 @@ function run(model)
 
     local s = "   - " .. table.concat(shortcuts, "\n   - ")
     s = s:gsub("\n$", "")
+    print(s)
 
-    local d = ipeui.Dialog(win, "Ipe: Shortcuts")
-    d:add("text", "text", {read_only=true }, 1, 1)
-    d:set("text", "To properly show all shortcuts, we need to open a dummy window first.")
-    d:addButton("ok", "Ok", "accept")
-    d:execute()
+    -- if not was_opened then
+    --     local d = ipeui.Dialog(win, "Ipe: Shortcuts")
+    --     d:add("text", "text", {read_only=true }, 1, 1)
+    --     d:set("text", "To properly show all shortcuts, we need to open a dummy window first.")
+    --     d:addButton("ok", "Ok", "accept")
+    --     d:execute()
+    --     was_opened = true
+    -- end
+
+    -- d = ipeui.Dialog(win, "Ipe: Shortcuts")
+    -- d:add("text", "text", {read_only=true }, 1, 1)
+    -- d:set("text", s)
+    -- d:addButton("ok", "Ok", "accept")
+    -- d:execute(prefs.latexlog_size)
 
     d = ipeui.Dialog(win, "Ipe: Shortcuts")
-    d:add("text", "text", {read_only=true }, 1, 1)
-    d:set("text", s)
+    d:add("list", "list", {}, 1, 1)
+    d:set("list", shortcuts)
     d:addButton("ok", "Ok", "accept")
     d:execute(prefs.latexlog_size)
 
 end
+
+------------------------------------------
 
 shortcuts.ipelet_1_list_shortcuts = "H"
