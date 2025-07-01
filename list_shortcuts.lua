@@ -1,4 +1,4 @@
-label = "list shortcuts" 
+label = "List shortcuts" 
 
 --this is a map for the names of the shortcuts
 local name_map = {
@@ -149,13 +149,35 @@ local name_map = {
 
 local button = false
 
+local saved_shortcuts_by_key = {}
+local saved_shortcuts = {}
+local by_key = false
+
 function print_on_terminal(d)
     button = true
     d:accept()
 end
 
+function sort_by_shortcut(d)
+    if by_key then 
+        d:set("list",saved_shortcuts)
+        by_key = false
+    else
+        d:set("list",saved_shortcuts_by_key)
+        by_key = true
+    end
+
+    -- table.sort(saved_shortcuts, function (a,b)
+    --             local atemp = string.match(a, "'(.-)'")
+    --             local btemp = string.match(b, "'(.-)'")
+    --             return atemp < btemp
+	-- 		end)
+
+end
+
 function run(model)
-    local shortcuts = {}
+    saved_shortcuts = {}
+    saved_shortcuts_by_name = {}
     for label, shortcut in pairs(_G.shortcuts) do
         local name = label
         if string.find(name, "ipelet_") then
@@ -167,9 +189,7 @@ function run(model)
                 end
                 if ipelet.methods ~= nil then
                     local number = tonumber(label:gsub("%D", ""))
-                    name = "(" .. name ..  " ipelet) " .. ipelet.methods[number].label
-                else
-                    name = name .. " ipelet"
+                    name = "(" .. name ..  ") " .. ipelet.methods[number].label
                 end
             end
         else
@@ -179,12 +199,19 @@ function run(model)
         end
         name = name:gsub("&&", "&")
         shortcut = shortcut:gsub("+", " + ")
-        shortcuts[#shortcuts + 1] = name .. ": '" .. shortcut .."' (shortcuts." .. label .. ")\n"
+        saved_shortcuts[#saved_shortcuts + 1] = name .. ": '" .. shortcut .."' (shortcuts." .. label .. ")\n"
+        saved_shortcuts_by_key[#saved_shortcuts_by_key + 1] = "'" .. shortcut .. "': " .. name .. " (shortcuts." .. label .. ")\n"
     end
 
-    table.sort(shortcuts)
+    table.sort(saved_shortcuts)
+    table.sort(saved_shortcuts_by_key, function(a, b)
+  local akey = a:match("'(.-)'")
+  local bkey = b:match("'(.-)'")
+  return akey < bkey
+end)
 
-    local s = table.concat(shortcuts, "\n")
+
+    local s = table.concat(saved_shortcuts, "\n")
     s = s:gsub("\n$", "")
 
     -- if not was_opened then
@@ -203,11 +230,12 @@ function run(model)
     -- d:execute(prefs.latexlog_size)
 
     d = ipeui.Dialog(win, "Shortcuts")
-    d:add("list", "list", {}, 1, 1)
-    d:set("list", shortcuts)
+    d:add("list", "list", {}, 2, 1)
+    d:set("list", saved_shortcuts)
     d:addButton("ok", "Ok", "accept")
+    d:addButton("sort", "Change sorting", sort_by_shortcut)
     d:addButton("copy", "Copy to clipboard", "reject")
-    d:addButton("copy", "Print on terminal", print_on_terminal)
+    d:addButton("print", "Print on terminal", print_on_terminal)
     copy = d:execute(prefs.latexlog_size)
     if not copy then model.ui:setClipboard(s) end
     if button then 
