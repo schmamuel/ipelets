@@ -102,6 +102,7 @@ function run(model, num)
     local prim = p:primarySelection()
     if prim == nil then
         model.ui:explain("nothing selected")
+        return
     end
     local objects = {}
     local prim_type = p[prim]:type()
