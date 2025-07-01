@@ -54,22 +54,28 @@ function check_text(sheets, obj)
 end
 
 function run(model)
-    local p = model:page()
+    local doc = model.doc
     local sheets = model.doc:sheets()
-    local edited_text = false
-    for i, obj, _ , _  in p:objects() do
-        check_color(sheets, obj, "stroke")
-        check_color(sheets, obj, "fill")
-        check_size(sheets, obj, "pen")
-        check_size(sheets, obj, "farrowsize")
-        check_size(sheets, obj, "rarrowsize")
-        check_size(sheets, obj, "symbolsize")
-        if check_text(sheets,obj) then edited_text = true end
+
+    for j =1,#doc do
+        local p = doc[j]
+        local edited_text = false
+        for i, obj, _ , _  in p:objects() do
+            if obj:type() ~= "group" then
+                check_color(sheets, obj, "stroke")
+                check_color(sheets, obj, "fill")
+                check_size(sheets, obj, "pen")
+                check_size(sheets, obj, "farrowsize")
+                check_size(sheets, obj, "rarrowsize")
+                check_size(sheets, obj, "symbolsize")
+                if check_text(sheets,obj) then edited_text = true end
+            end
+        end
     end
     if edited_text then model:autoRunLatex() end
 end
  
 -------------------
 
-shortcuts.ipelet_1_set_absolute = "Ctrl+T"
-shortcuts.absolute = nil
+-- shortcuts.ipelet_1_set_absolute = "Ctrl+T"
+-- shortcuts.absolute = nil
