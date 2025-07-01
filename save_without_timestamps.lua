@@ -3,7 +3,7 @@ label = "Save without timestamp"
 
 about = [[ Saves the document without updating the timestamp to make merging easier. ]]
 
-auto_export_directory = "./"
+local auto_export_directory = _G.export_directory
 
 function run(model)
   local fname = model.file_name
@@ -61,6 +61,7 @@ shortcuts.save = nil
 
 
 function _G.MODEL:auto_export(fname)
+  if auto_export_directory == nil then auto_export_directory = "./" end
   if not self:runLatex() then
     self.ui:explain("Latex error - could not auto-export!")
   else
