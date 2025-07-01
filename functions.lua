@@ -94,7 +94,7 @@ function clean_labels(model)
         for i, obj, sel, layer in doc[j]:objects() do
             local custom = obj:getCustom()
             if custom == empty_string then 
-                local xml = obj:xml():gsub('custom="[^"]*"', 'custom=""')
+                local xml = obj:xml():gsub('custom="[^"]*"', 'custom=""', 1)
 			    obj = _G.ipe.Object(xml)
                 doc[j]:replace(i, obj)
             end
