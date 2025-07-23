@@ -4,6 +4,8 @@ function run(model)
     local p = model:page()
   local prim = p:primarySelection()
 
+  if prim == nil then model.ui:explain("no selection") return end
+
   if p[prim]:type() ~= "text" then
     model.ui:explain("selection is not text")
     return
