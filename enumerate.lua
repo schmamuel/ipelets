@@ -1,13 +1,6 @@
+label = "enumerate"
+
 local enum_types = {"enumerate_roman", "enumerate_arabic", "enumerate_alph"}
-
--- saving the old function
-function _G.MODEL:enumerate_backup_runLatex() end
-_G.MODEL.enumerate_backup_runLatex = _G.MODEL.runLatex
-
-function _G.MODEL:runLatex()
-   refresh_enumerate(self)
-   return self:enumerate_backup_runLatex()
-end
 
 function find_type(name)
     for i,enum_name in ipairs(enum_types) do
@@ -20,14 +13,14 @@ local function remove_counter(s)
     return s:gsub("^\\addtocounter{enumi}%s*{.-}", ""):gsub("^%s*\\item%s*", "")
 end
 
-function refresh_enumerate(model)
-    local doc = model.doc
-
-    for i = 1, #doc do
-        local p = doc[i]
+function run(model)
+    -- local doc = model.doc
+    local p = model:page()
+    -- for i = 1, #doc do
+    --     local p = doc[i]
         for _,enum_name in ipairs(enum_types) do
             local objects= {}
-            for index, obj, sel, layer in doc[i]:objects() do
+            for index, obj, sel, layer in p:objects() do
                 if obj:get("textstyle") == enum_name then objects[#objects + 1] = index end
             end
             table.sort(objects, function (a,b)
@@ -50,7 +43,9 @@ function refresh_enumerate(model)
                 obj:setText("\\addtocounter{enumi}{" .. j - 1 .. "}\\item " .. text)
             end
         end
-        
-    end
-
+    -- end
 end
+
+
+----------------------------------------
+shortcuts.ipelet_1_enumerate = "Shift+F5"
