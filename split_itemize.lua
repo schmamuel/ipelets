@@ -144,4 +144,4 @@ methods = {
 ---------------------------------------------
 
 shortcuts.ipelet_1_split_itemize = "Alt+X"
-shortcuts.ipelet_2_split_itemize = "Alt+J
+shortcuts.ipelet_2_split_itemize = "Alt+J"
