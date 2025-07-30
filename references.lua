@@ -1,5 +1,6 @@
  
 local bg_layer = "background_references"
+local no_references_layer = "no_references"
 
 ----------------------------------------------------------------------
 -- adding objects before every run of latex ---------------------
@@ -68,25 +69,26 @@ function print_on_every_page(model, objects)
    for i = 2, #doc do
 
       local p = doc[i]
-      
-      -- if the layer does not exists, create it
-      if not page_has_layer(p, bg_layer) then
-	      p:addLayer(bg_layer)
-	      make_layer_visible(p, bg_layer)
+      if not page_has_layer(p, no_references_layer) then 
+         -- if the layer does not exists, create it
+         if not page_has_layer(p, bg_layer) then
+            p:addLayer(bg_layer)
+            make_layer_visible(p, bg_layer)
+         end
+         
+         -- lock the layer
+         p:setLocked(bg_layer, true)
+
+         -- remove all objects from the layer
+         clear_layer(p, bg_layer)
+
+         -- add the objects to the layer
+         for j = 1, #objects do
+            p:insert(nil, clones[i][j], nil, bg_layer)
+         end
+
+         if #objects == 0 then p:removeLayer(bg_layer) end
       end
-      
-      -- lock the layer
-      p:setLocked(bg_layer, true)
-
-      -- remove all objects from the layer
-      clear_layer(p, bg_layer)
-
-      -- add the objects to the layer
-      for j = 1, #objects do
-	      p:insert(nil, clones[i][j], nil, bg_layer)
-      end
-
-      if #objects == 0 then p:removeLayer(bg_layer) end
    end
 end
 
