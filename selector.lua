@@ -107,7 +107,7 @@ function run(model, num)
     local objects = {}
     local prim_type = p[prim]:type()
     for i, _, _ , _  in p:objects() do
-        if p:visible(currView, i) and p[i]:type() == prim_type then
+        if p:visible(currView, i) and p[i]:type() == prim_type and not p:isLocked(p:layerOf(i)) then
             objects[#objects + 1] = i
         end
     end
