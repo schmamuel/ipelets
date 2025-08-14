@@ -19,8 +19,14 @@ function connect_marks(model)
         model.ui:explain("you need to select two marks")
         return
     end
-    local pos1 = p[prim]:position()
-    local pos2 = p[sec]:position()
+
+    if p[prim]:type() ~= "reference" or p[sec]:type() ~= "reference" then
+        model.ui:explain("you need to select two marks")
+        return
+    end
+
+    local pos1 = p[prim]:matrix() * p[prim]:position()
+    local pos2 = p[sec]:matrix() * p[sec]:position()
     local diff = pos1 - pos2
     local dist = diff:len() * 0.5
     local mid = pos1 - (diff * 0.5)
